@@ -1,0 +1,17 @@
+server:
+  port: 8181
+logging:
+  level:
+    io:
+     # r2dbc: DEBUG
+    org:
+      springframework:
+        data:
+        #  r2dbc: DEBUG
+spring:
+   application:
+     name: api-gateway
+   r2dbc:
+     url: r2dbc:postgresql://localhost:5432/food_delivery
+     username: codestorykh
+     password: password
