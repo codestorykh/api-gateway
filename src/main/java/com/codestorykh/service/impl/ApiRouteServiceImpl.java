@@ -9,6 +9,7 @@ import com.codestorykh.repository.ApiRouteRepository;
 import com.codestorykh.service.ApiRouteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -135,6 +136,7 @@ public class ApiRouteServiceImpl implements ApiRouteService {
                                     apiRoute.getCreatedBy(),
                                     apiRoute.getCreatedAt().toString(),
                                     apiRoute.getUpdatedBy(),
-                                    apiRoute.getUpdatedAt().toString());
+                                    apiRoute.getUpdatedAt() == null ?
+                                            null : apiRoute.getUpdatedAt().toString());
     }
 }
