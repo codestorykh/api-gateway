@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "7fc50daa-a84b-4333-a3e6-4e8b2523f348",
+		"name": "API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24022677"
+	},
+	"item": [
+		{
+			"name": "Create new route",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uri\": \"https://jsonplaceholder.typicode.com\",\n    \"path\": \"/posts/{id}\",\n    \"method\": \"PUT\",\n    \"description\":\"Update a record.\",\n    \"group_code\": \"CODESTORYKH\",\n    \"status\": \"ACTIVE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8181/api/routers",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"routers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"uri\": \"https://jsonplaceholder.typicode.com\",\n    \"path\": \"/posts\",\n    \"method\": \"GET\",\n    \"description\": \"Fetch all posts\",\n     \"group_code\": \"CODESTORYKH\",\n    \"status\": \"ACTIVE\",\n    \"created_by\": \"admin\",\n    \"created_at\": \"2024-12-05\",\n    \"updated_by\": \"admin\",\n    \"updated_at\": \"2024-12-05\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8181/api/routers/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"routers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8181/api/routers/19",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"routers",
+						"19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8181/api/routers",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"routers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8181/api/routers/49",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"routers",
+						"49"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh routes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uri\": \"https://jsonplaceholder.typicode.com\",\n    \"path\": \"posts\",\n    \"method\": \"GET\",\n    \"description\":\"Fetch all posts\",\n    \"status\": \"ACTIVE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8181/api/routers/refresh-routes",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"routers",
+						"refresh-routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": 1,\n    \"id\": 1,\n    \"title\": \"Testing POST\",\n    \"body\": \"Success ✌️\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8181/posts",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client PUT",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": 1,\n    \"id\": 1,\n    \"title\": \"Testing PUT\",\n    \"body\": \"Success ✌️\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8181/posts/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8181/posts",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8181/posts/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
