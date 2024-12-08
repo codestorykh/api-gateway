@@ -28,17 +28,7 @@ public class RequestLoggingFilter implements GlobalFilter {
         logger.info("Request Method: {}", request.getMethod());
         logger.info("Request Headers: {}", request.getHeaders());
         
-        if (HttpMethod.POST.equals(request.getMethod()) || HttpMethod.PUT.equals(request.getMethod())) {
-            // Log the body of the request (only for POST/PUT methods)
-            return exchange.getRequest().getBody()
-                .collectList()
-                .map(bodyList -> {
-                    String body = bodyList.toString();
-                    logger.info("Request Body: {}", body);
-                    return body;
-                })
-                .flatMap(body -> chain.filter(exchange));  // Continue the filter chain
-        }
+    
 
         // Continue processing if body is not relevant
         return chain.filter(exchange);
