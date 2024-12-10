@@ -83,6 +83,14 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent -->
+		<dependency>
+			<groupId>com.datadoghq</groupId>
+			<artifactId>dd-java-agent</artifactId>
+			<version>1.43.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -99,6 +107,20 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>23</source> <!-- Or the Java version you are using -->
+					<target>23</target> <!-- Or the Java version you are using -->
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

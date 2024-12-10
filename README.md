@@ -81,3 +81,36 @@ CREATE TABLE IF NOT EXISTS api_route (
     updated_by VARCHAR(255)
 );
 ```
+```bash
+<build>
+    <plugins>
+        <!-- Remove it plugin if you want to run on IDE if not sure what wrong with my IDE -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>23</source> <!-- Or the Java version you are using -->
+                <target>23</target> <!-- Or the Java version you are using -->
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <excludes>
+                    <exclude>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclude>
+                </excludes>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```

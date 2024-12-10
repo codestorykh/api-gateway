@@ -1,3 +1,4 @@
+/*
 package com.codestorykh.config;
 
 import com.codestorykh.repository.ApiRouteRepository;
@@ -16,3 +17,4 @@ public class GatewayConfiguration {
        return new RouteLocatorDetail(routeLocatorBuilder, apiRouteRepository);
     }
 }
+*/

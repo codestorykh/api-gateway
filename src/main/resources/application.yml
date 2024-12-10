@@ -13,5 +13,14 @@ spring:
      name: api-gateway
    r2dbc:
      url: r2dbc:postgresql://localhost:5432/food_delivery
+     #url: r2dbc:postgresql://postgres:5432/food_delivery
      username: codestorykh
      password: password
+
+management:
+  datadog:
+    metrics:
+      export:
+        enabled: true
+        api-key: 05d95f14fb6e1673ad588552b7938e2f7999
+        host-tag: us5.datadoghq.com
