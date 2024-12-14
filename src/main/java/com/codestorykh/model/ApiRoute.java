@@ -24,6 +24,10 @@ public class ApiRoute implements Serializable {
     private String description;
     @Column(name = "group_code")
     private String groupCode;
+    @Column(name = "rate_limit")
+    private Integer rateLimit;
+    @Column(name = "rate_limit_duration")
+    private Integer rateLimitDuration;
     private String status;
 
     @Column(name = "created_by")

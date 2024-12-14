@@ -8,5 +8,7 @@ public record RouteApiRequest(Long id,
                               String method,
                               String description,
                               @JsonProperty("group_code") String groupCode,
+                              @JsonProperty("rate_limit") Integer rateLimit,
+                              @JsonProperty("rate_limit_duration") Integer rateLimitDuration,
                               String status) {
 }

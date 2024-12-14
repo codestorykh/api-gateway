@@ -20,4 +20,9 @@ public interface ApiRouteRepository extends R2dbcRepository<ApiRoute, Long> {
     """)
     Mono<ApiRoute> updateRoute(Long id, String uri, String path, String method, String description,
                               String groupCode, String status, String updatedBy);
+
+    @Query("""
+    SELECT * FROM api_route WHERE path = :path AND method = :method
+    """)
+   Mono<ApiRoute> findFirstByPathAndMethod(String path, String method);
 }
