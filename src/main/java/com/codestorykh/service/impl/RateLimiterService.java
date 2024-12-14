@@ -1,8 +1,7 @@
 package com.codestorykh.service.impl;
 
-import com.codestorykh.model.ApiRoute;
 import com.codestorykh.repository.ApiRouteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Service;
@@ -10,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Collections;
 
+@Slf4j
 @Service
 public class RateLimiterService {
 
@@ -40,14 +40,18 @@ public class RateLimiterService {
 
 
     public Mono<Boolean> isAllowed(String path, String method, String identifier) {
-        return apiRouteRepository.findFirstByPathAndMethod(path, method)
+
+        final  String normalizedPath = normalizePath(path);
+        return apiRouteRepository.findFirstByPathAndMethod(normalizedPath, method)
                 .flatMap(routeConfig -> {
                     if (routeConfig.getRateLimit() == null) {
                         return Mono.just(true); // No rate limit for this route
                     }
 
                     // Construct Redis key (identifier:path:method)
+                    log.info("Rate limiting for path: {}, method: {}, identifier: {}", path, method, identifier);
                     String redisKey = String.format("%s:%s:%s", identifier, path, method);
+                    log.info("Redis key: {}", redisKey);
 
                     // Execute Lua script to enforce rate limit
                     return Mono.fromCallable(() -> stringRedisTemplate.execute(
@@ -60,4 +64,13 @@ public class RateLimiterService {
                 .defaultIfEmpty(true); // Default to true if no route configuration is found
     }
 
+    /**
+     * Normalize the request path to match the database configuration.
+     * Replace dynamic segments with placeholders (e.g., posts/1 -> posts/{id}).
+     */
+    private String normalizePath(String path) {
+        // Define your dynamic path patterns and replace them with placeholders
+        return path.replaceAll("/posts/\\d+", "/posts/{id}")
+                .replaceAll("/users/\\d+", "/users/{id}");
+    }
 }
