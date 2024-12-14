@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"uri\": \"https://jsonplaceholder.typicode.com\",\n    \"path\": \"/posts/{id}\",\n    \"method\": \"PUT\",\n    \"description\":\"Update a record.\",\n    \"group_code\": \"CODESTORYKH\",\n    \"status\": \"ACTIVE\"\n}",
+					"raw": "{\n    \"uri\": \"https://jsonplaceholder.typicode.com\",\n    \"path\": \"/posts/{id}\",\n    \"method\": \"GET\",\n    \"description\":\"Update a record.\",\n    \"group_code\": \"CODESTORYKH\",\n    \"rate_limit\": 10, // 10 requests\n    \"rate_limit_duration\": 20, // 20 seconds\n    \"status\": \"ACTIVE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"uri\": \"https://jsonplaceholder.typicode.com\",\n    \"path\": \"/posts\",\n    \"method\": \"GET\",\n    \"description\": \"Fetch all posts\",\n     \"group_code\": \"CODESTORYKH\",\n    \"status\": \"ACTIVE\",\n    \"created_by\": \"admin\",\n    \"created_at\": \"2024-12-05\",\n    \"updated_by\": \"admin\",\n    \"updated_at\": \"2024-12-05\"\n}",
+					"raw": "{\n    \"id\": 1,\n    \"uri\": \"https://jsonplaceholder.typicode.com\",\n    \"path\": \"/posts\",\n    \"method\": \"GET\",\n    \"description\": \"Fetch all posts\",\n    \"group_code\": \"CODESTORYKH\",\n    \"rate_limit\": 10, // 10 requests\n    \"rate_limit_duration\": 20, // 20 seconds\n    \"status\": \"ACTIVE\",\n    \"created_by\": \"admin\",\n    \"created_at\": \"2024-12-05\",\n    \"updated_by\": \"admin\",\n    \"updated_at\": \"2024-12-05\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -75,7 +75,7 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:8181/api/routers/19",
+					"raw": "localhost:8181/api/routers/1",
 					"host": [
 						"localhost"
 					],
@@ -83,7 +83,7 @@
 					"path": [
 						"api",
 						"routers",
-						"19"
+						"1"
 					]
 				}
 			},
