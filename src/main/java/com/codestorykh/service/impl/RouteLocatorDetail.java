@@ -15,11 +15,15 @@ import reactor.core.publisher.Flux;
 import java.util.Map;
 
 @Component
-@RequiredArgsConstructor
 public class RouteLocatorDetail implements RouteLocator {
 
     private final RouteLocatorBuilder routeLocatorBuilder;
     private final ApiRouteRepository apiRouteRepository;
+
+    public RouteLocatorDetail(RouteLocatorBuilder routeLocatorBuilder, ApiRouteRepository apiRouteRepository) {
+        this.routeLocatorBuilder = routeLocatorBuilder;
+        this.apiRouteRepository = apiRouteRepository;
+    }
 
     @Override
     public Flux<Route> getRoutes() {

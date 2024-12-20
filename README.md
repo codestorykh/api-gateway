@@ -81,3 +81,11 @@ CREATE TABLE IF NOT EXISTS api_route (
     updated_by VARCHAR(255)
 );
 ```
+4. Connect to Postgres from PgAdmin
+```bash
+Host: host.docker.internal
+Port: 5432
+Username: codestorykh
+Password: password
+Database: api_gateway
+```

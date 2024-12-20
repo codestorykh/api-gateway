@@ -5,10 +5,10 @@ FROM openjdk:23-jdk-slim
 WORKDIR /app
 
 # Copy the JAR file from the target directory to the container
-COPY target/my-application.jar /app/my-application.jar
+COPY target/*.jar /app/api-gateway.jar
 
 # Expose the port your application will run on
 EXPOSE 8080
 
 # Run the application when the container starts
-ENTRYPOINT ["java", "-jar", "my-application.jar"]
+ENTRYPOINT ["java", "-jar", "api-gateway.jar"]

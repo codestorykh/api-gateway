@@ -1,21 +1,21 @@
 server:
-  port: 8181
+  port: ${SERVER_PORT:8181} # Default to 8181 if not set
 logging:
   level:
     io:
-     # r2dbc: DEBUG
+    # r2dbc: DEBUG
     org:
       springframework:
         data:
         #  r2dbc: DEBUG
 spring:
-   application:
-     name: api-gateway
-   r2dbc:
-     url: r2dbc:postgresql://localhost:5432/food_delivery
-     username: codestorykh
-     password: password
-   data:
-     redis:
-       host: localhost
-       port: 6379
+  application:
+    name: ${SPRING_APPLICATION_NAME:api-gateway}
+  r2dbc:
+    url: ${SPRING_DATASOURCE_URL:r2dbc:postgresql://localhost:5432/api_gateway}
+    username: ${SPRING_DATASOURCE_USERNAME:codestorykh}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: ${SPRING_REDIS_PORT:6379}

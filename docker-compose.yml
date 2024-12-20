@@ -1,15 +1,106 @@
 version: '3.8'
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8181:8181" # Expose the app on port 8181
+    depends_on:
+      - postgres
+      - redis
+      - kafka
+    environment:
+      SPRING_APPLICATION_NAME: api-gateway
+      SPRING_DATASOURCE_URL: r2dbc:postgresql://postgres:5432/api_gateway
+      SPRING_DATASOURCE_USERNAME: codestorykh
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    networks:
+      - api-gateway
+    volumes:
+      - app:/app/logs
+# Postgres
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: codestorykh
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: api_gateway
+    ports:
+      - "5432:5432"
+    networks:
+      - api-gateway
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+# pgAdmin
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    networks:
+      - api-gateway
+# Redis
   redis:
-    image: redis:latest
+    image: redis:7
     container_name: redis
     ports:
       - "6379:6379"
+    networks:
+        - api-gateway
     volumes:
-      - redis-data:/data
-    command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
+      - redis_data:/data
+# Kafka
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+        - api-gateway
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+        - api-gateway
+# Zipkin
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - api-gateway
+
+####
+networks:
+  api-gateway:
+    driver: bridge
 
 volumes:
-  redis-data:
-    driver: local
+  postgres_data:
+  redis_data:
+  app:
