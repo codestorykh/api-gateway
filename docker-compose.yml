@@ -1,13 +1,16 @@
 version: '3.8'
 
 services:
-  app:
+  api-gateway:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: api-gateway
-    ports:
-      - "8181:8181" # Expose the app on port 8181
+    deploy:
+      replicas: 3         # Create 3 replicas
+      restart_policy:
+        condition: on-failure
+    expose:
+      - "8080"    # Internal port, no need to map to host
     depends_on:
       - postgres
       - redis
@@ -23,6 +26,18 @@ services:
       - api-gateway
     volumes:
       - app:/app/logs
+# Nginx
+  load-balancer-nginx:
+    image: nginx:latest
+    container_name: load-balancer
+    ports:
+      - "8181:80"
+    volumes:
+      - /Users/theara/Desktop/api-gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-gateway
+    networks:
+      - api-gateway
 # Postgres
   postgres:
     image: postgres:15
