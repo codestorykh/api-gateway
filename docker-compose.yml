@@ -14,7 +14,6 @@ services:
     depends_on:
       - postgres
       - redis
-      - kafka
     environment:
       SPRING_APPLICATION_NAME: api-gateway
       SPRING_DATASOURCE_URL: r2dbc:postgresql://postgres:5432/api_gateway
@@ -33,7 +32,8 @@ services:
     ports:
       - "8181:80"
     volumes:
-      - /Users/theara/Desktop/api-gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /Users/theara/Desktop/api-gateway/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /Users/theara/Desktop/api-gateway/nginx/html:/usr/share/nginx/html:ro
     depends_on:
       - api-gateway
     networks:
