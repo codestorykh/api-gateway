@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+spec:
+  replicas: 3  # Number of Pods
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: reancode7/dev:api-gateway
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_APPLICATION_NAME
+              value: api-gateway
+            - name: SPRING_DATASOURCE_URL
+              value: r2dbc:postgresql://postgres-service:5432/api_gateway
+            - name: SPRING_DATASOURCE_USERNAME
+              value: codestorykh
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: password
+            - name: SPRING_REDIS_HOST
+              value: redis-service
+            - name: SPRING_REDIS_PORT
+              value: '6379'
