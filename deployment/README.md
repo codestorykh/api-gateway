@@ -56,7 +56,7 @@ kubectl -n kubernetes-dashboard create token admin-user
 kubectl proxy
 
 # Open the Dashboard
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 ```
 
 ## Key features of the K8s Dashboard include
